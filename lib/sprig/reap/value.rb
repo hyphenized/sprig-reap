@@ -45,20 +45,9 @@ module Sprig::Reap
     end
 
     def sprig_dependency_reference
-      references = Array(value).map do |id|
-        sprig_id = Model.find(klass, id).try(:sprig_id)
-
-        sprig_record_reference(klass, sprig_id)
-      end
-
+      references = Array(value)
       # For proper Sprig file formatting, need to return an array for HABTM
       association.has_and_belongs_to_many? ? references : references.first
-    end
-
-    def sprig_record_reference(klass, sprig_id)
-      return if sprig_id.nil?
-
-      "<%= sprig_record(#{klass}, #{sprig_id}).id %>"
     end
 
     def read_attribute

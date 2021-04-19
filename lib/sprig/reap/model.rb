@@ -6,10 +6,6 @@ module Sprig::Reap
     def self.all
       @@all ||= begin
         models = Sprig::Reap.models.map { |model_input| new(model_input) }
-
-        tsorted_classes(models).map do |klass|
-          models.find { |model| model.klass == klass }
-        end
       end
     end
 

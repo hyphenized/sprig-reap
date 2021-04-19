@@ -49,7 +49,7 @@ Sprig.reap(target_env: 'integration')
 
 #### Model List
 If you only want to `reap` a subset of your models, you may provide a list of models
-(`ActiveRecord::Base.subclasses`-only) or `ActiveRecord::Relations` (for pulling records based on
+(`ActiveRecord::Base.descendants`-only) or `ActiveRecord::Relations` (for pulling records based on
 scope):
 ```
 # Rake Task

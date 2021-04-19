@@ -22,7 +22,7 @@ module Sprig::Reap
 
     def polymorphic_dependencies
       return [] unless polymorphic?
-      @polymorphic_dependencies ||= ActiveRecord::Base.subclasses.select { |model| polymorphic_match? model }
+      @polymorphic_dependencies ||= ActiveRecord::Base.descendants.select { |model| polymorphic_match? model }
     end
 
     def polymorphic_match?(model)
@@ -44,7 +44,7 @@ module Sprig::Reap
     end
 
     def has_and_belongs_to_many_attr
-      association.association_foreign_key.pluralize if has_and_belongs_to_many?
+      "#{association.name.to_s.singularize}_ids" if has_and_belongs_to_many?
     end
 
     def foreign_key

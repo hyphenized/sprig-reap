@@ -5,7 +5,7 @@ module Sprig::Reap::Inputs
     def self.valid_classes
       @@valid_classes ||= begin
         Rails.application.eager_load!
-        ActiveRecord::Base.subclasses
+        ActiveRecord::Base.descendants
       end
     end
 

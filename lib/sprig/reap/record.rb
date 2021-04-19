@@ -11,7 +11,7 @@ module Sprig::Reap
     end
 
     def attributes
-      @attributes ||= model.attributes.delete_if { |a| a == "id" } | model.associations.map(&:has_and_belongs_to_many_attr).compact
+      @attributes ||= model.attributes.delete_if { |a| a == "id" }
     end
 
     def to_hash
@@ -27,7 +27,7 @@ module Sprig::Reap
     end
 
     def sprig_id
-      @sprig_id ||= model.existing_sprig_ids.include?(record.id) ? model.generate_sprig_id : record.id
+      @sprig_id ||= record.id
     end
 
     private

@@ -4,12 +4,12 @@ describe Sprig::Reap::Inputs::Model do
   describe ".valid_classes" do
     subject { described_class }
 
-    its(:valid_classes) { should == ActiveRecord::Base.subclasses }
+    its(:valid_classes) { should == ActiveRecord::Base.descendants }
   end
 
   describe ".default" do
     it "instantiates a Sprig::Reap::Inputs::Model for each model" do
-      ActiveRecord::Base.subclasses.each do |model|
+      ActiveRecord::Base.descendants.each do |model|
         Sprig::Reap::Inputs::Model.should_receive(:new).with(model)
       end
 

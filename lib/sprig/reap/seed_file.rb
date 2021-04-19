@@ -30,23 +30,17 @@ module Sprig::Reap
     private
 
     def initialize_file
-      existing_file = exists?
-      access_type = existing_file ? 'a+' : 'w'
 
-      File.open(path, access_type) do |file|
+      File.open(path, 'w') do |file|
         namespace = DEFAULT_NAMESPACE
 
-        if existing_file
-          model.existing_sprig_ids = existing_sprig_ids(file.read)
-          namespace = nil
-          file.write("\n")
-        end
 
         yield file, namespace
       end
 
     rescue => e
       log_error "There was an issue writing to the file for #{model}:\n#{e.message}"
+      puts e.full_message
     end
 
     def existing_sprig_ids(yaml)
